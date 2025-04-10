@@ -13,7 +13,7 @@ import { axiosPrivate } from '../../api/axios';
 import { useNavigate } from 'react-router-dom';
 import SubmitClientWork from '../Tasks/SubmitClientWork';
 import ClientInquiries from '../Clients/ClientInquiries';
-import DownloadStatus from '../Invoice/DownloadStatus';
+// import DownloadStatus from '../Invoice/DownloadStatus';
 import SendActivityReport from './SendActivityReport';
 import { useYear } from '../YearContext/YearContext';
 
@@ -614,7 +614,7 @@ Actions
                  <FileChartColumn size={14} />
                  </button>
 
-                 <DownloadStatus assignment={assignment.id} />
+         
 
                  <button onClick={()=>{setOpenEmailForm(true); setEmailAssignmentId(assignment.id); setCustomerId(assignment.customer_id)}} className="w-[30px] h-[29px] rounded-[5px] bg-[#0A3363]  flex items-center justify-center gap-x-1 text-white font-semibold text-[10px]">
                  <Send size={14} />

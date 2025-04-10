@@ -3,8 +3,8 @@ import { useColor } from "../ColorContext/ColorContext";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Download, FileChartColumn, Mail, Send } from "lucide-react";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
+// import html2canvas from "html2canvas";
+// import jsPDF from "jspdf";
 import SendInvoice from "./SendInvoice";
 import { useYear } from "../YearContext/YearContext";
 
@@ -501,88 +501,88 @@ const formatDate = (isoString) => {
   return date.toLocaleDateString('en-GB'); // Use 'en-GB' for DD/MM/YYYY or 'en-US' for MM/DD/YYYY
 };
 
-const generatePdf = async () => {
-  if (!invoiceRef.current) return;
+// const generatePdf = async () => {
+//   if (!invoiceRef.current) return;
 
-  try {
-    // 1) Capture the DOM with html2canvas
-    // Increase "scale" for higher resolution. But keep in mind it increases canvasHeight.
-    const scale = 2; 
-    const canvas = await html2canvas(invoiceRef.current, { scale });
+//   try {
+//     // 1) Capture the DOM with html2canvas
+//     // Increase "scale" for higher resolution. But keep in mind it increases canvasHeight.
+//     const scale = 2; 
+//     const canvas = await html2canvas(invoiceRef.current, { scale });
     
-    // The full canvas size (in device pixels) after rendering.
-    const canvasWidth = canvas.width;
-    const canvasHeight = canvas.height;
+//     // The full canvas size (in device pixels) after rendering.
+//     const canvasWidth = canvas.width;
+//     const canvasHeight = canvas.height;
 
-    // 2) Create a jsPDF instance with custom page size: 816 wide × 1056 tall (points)
-    const pdf = new jsPDF("p", "pt", [794, 1123]);
+//     // 2) Create a jsPDF instance with custom page size: 816 wide × 1056 tall (points)
+//     const pdf = new jsPDF("p", "pt", [794, 1123]);
 
-    // 3) We'll treat our "pdfWidth" and "pdfHeight" as 816 & 1056 points
-    const pdfWidth = 794;
-    const pdfHeight = 1123;
+//     // 3) We'll treat our "pdfWidth" and "pdfHeight" as 816 & 1056 points
+//     const pdfWidth = 794;
+//     const pdfHeight = 1123;
 
-    // 4) Figure out how tall each page is in **canvas** pixels. 
-    // One PDF page (1056 points tall) will display `1056 * scale` of the canvas' pixel height.
-    // If scale=1, that's 1056 px of the canvas. If scale=2, that’s 2112 px, etc.
-    const pageCanvasHeight = pdfHeight * scale;
-    const totalPages = Math.ceil(canvasHeight / pageCanvasHeight);
+//     // 4) Figure out how tall each page is in **canvas** pixels. 
+//     // One PDF page (1056 points tall) will display `1056 * scale` of the canvas' pixel height.
+//     // If scale=1, that's 1056 px of the canvas. If scale=2, that’s 2112 px, etc.
+//     const pageCanvasHeight = pdfHeight * scale;
+//     const totalPages = Math.ceil(canvasHeight / pageCanvasHeight);
 
-    let pageY = 0;
-    for (let pageIndex = 0; pageIndex < totalPages; pageIndex++) {
-      if (pageIndex > 0) {
-        pdf.addPage(); // create subsequent pages
-      }
+//     let pageY = 0;
+//     for (let pageIndex = 0; pageIndex < totalPages; pageIndex++) {
+//       if (pageIndex > 0) {
+//         pdf.addPage(); // create subsequent pages
+//       }
 
-      // 5) Create a temporary <canvas> for this page’s slice
-      const canvasPage = document.createElement("canvas");
-      canvasPage.width = canvasWidth;
-      canvasPage.height = Math.min(pageCanvasHeight, canvasHeight - pageY); 
+//       // 5) Create a temporary <canvas> for this page’s slice
+//       const canvasPage = document.createElement("canvas");
+//       canvasPage.width = canvasWidth;
+//       canvasPage.height = Math.min(pageCanvasHeight, canvasHeight - pageY); 
 
-      // 6) Draw the slice from the full canvas onto this page canvas
-      const context = canvasPage.getContext("2d");
-      context.drawImage(
-        canvas,
-        0, 
-        pageY, 
-        canvasWidth, 
-        canvasPage.height,  // only as tall as what's remaining
-        0, 
-        0, 
-        canvasWidth, 
-        canvasPage.height
-      );
+//       // 6) Draw the slice from the full canvas onto this page canvas
+//       const context = canvasPage.getContext("2d");
+//       context.drawImage(
+//         canvas,
+//         0, 
+//         pageY, 
+//         canvasWidth, 
+//         canvasPage.height,  // only as tall as what's remaining
+//         0, 
+//         0, 
+//         canvasWidth, 
+//         canvasPage.height
+//       );
 
-      // Convert the sliced canvas to an image for jsPDF
-      const imgData = canvasPage.toDataURL("image/png");
+//       // Convert the sliced canvas to an image for jsPDF
+//       const imgData = canvasPage.toDataURL("image/png");
 
-      // 7) Calculate placement/size in PDF
-      // We'll match the PDF width exactly with the slice width
-      const imageAspectRatio = canvasPage.width / canvasPage.height;
-      const slicePDFWidth = pdfWidth; 
-      const slicePDFHeight = slicePDFWidth / imageAspectRatio;
+//       // 7) Calculate placement/size in PDF
+//       // We'll match the PDF width exactly with the slice width
+//       const imageAspectRatio = canvasPage.width / canvasPage.height;
+//       const slicePDFWidth = pdfWidth; 
+//       const slicePDFHeight = slicePDFWidth / imageAspectRatio;
 
-      // 8) Insert image into PDF
-      pdf.addImage(
-        imgData,
-        "PNG",
-        0, // x pos in PDF
-        0, // y pos in PDF
-        slicePDFWidth,
-        slicePDFHeight,
-        undefined,
-        "FAST" // use "SLOW" for higher quality but bigger file
-      );
+//       // 8) Insert image into PDF
+//       pdf.addImage(
+//         imgData,
+//         "PNG",
+//         0, // x pos in PDF
+//         0, // y pos in PDF
+//         slicePDFWidth,
+//         slicePDFHeight,
+//         undefined,
+//         "FAST" // use "SLOW" for higher quality but bigger file
+//       );
 
-      // Move down the full pageCanvasHeight for the next slice
-      pageY += pageCanvasHeight;
-    }
+//       // Move down the full pageCanvasHeight for the next slice
+//       pageY += pageCanvasHeight;
+//     }
 
-    // 9) Save with a custom filename
-    pdf.save(`Invoice.pdf`);
-  } catch (err) {
-    console.error("PDF generation error:", err);
-  }
-};
+//     // 9) Save with a custom filename
+//     pdf.save(`Invoice.pdf`);
+//   } catch (err) {
+//     console.error("PDF generation error:", err);
+//   }
+// };
 
 const handleGstCheckboxChange = (e) => {
   const checked = e.target.checked;
@@ -1516,7 +1516,7 @@ const handleGstCheckboxChange = (e) => {
 </div>
 
            <div className="w-full h-fit bg-white rounded-[10px]  border border-[#D8D8D8] mt-8 flex gap-x-2 justify-center items-center p-3">
-                 <button onClick={generatePdf} className="w-[30px] h-[30px] rounded-[5px] bg-blue-500 flex justify-center items-center text-white">
+                 <button  className="w-[30px] h-[30px] rounded-[5px] bg-blue-500 flex justify-center items-center text-white">
                  <Download size={14} />
                  </button>
                 

@@ -61,8 +61,8 @@ import InwardOutward from './components/Utilities/InwardOutward'
 import ClientInquiryForm from './components/Clients/ClientInquiryForm'
 import ClientInquiries from './components/Clients/ClientInquiries'
 import ManageBanks from './components/ManageCompany/ManageBanks'
-import InvoiceTemplate from './components/Invoice/InvoiceTemplate'
-import StatusTemplate from './components/Invoice/StatusTemplate'
+// import InvoiceTemplate from './components/Invoice/InvoiceTemplate'
+// import StatusTemplate from './components/Invoice/StatusTemplate'
 import SendActivityReportForm from './components/Tasks/SendActivityReportForm'
 import RequestAttendance from './components/HR/RequestAttendance'
 import AttendanceRegister from './components/HR/AttendanceRegister'
@@ -86,7 +86,7 @@ function App() {
         </ProtectedRoute>}>
       <Route index element={<Navigate to="/main/dashboard" />} />
                     <Route path="/main/dashboard" element={<Dashboard />} />
-                    <Route path="/main/invoicetemp" element={<InvoiceTemplate />} />
+                    {/* <Route path="/main/invoicetemp" element={<InvoiceTemplate />} /> */}
                     <Route path="/main/users" element={<Users/>} />
                     <Route path="/main/departments" element={<Departments/>} />
                     <Route path="/main/reports" element={<Reports/>} />
