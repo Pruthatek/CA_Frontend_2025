@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+// import jsPDF from 'jspdf';
 import axios from 'axios';
 import { useColor } from '../ColorContext/ColorContext';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
@@ -162,10 +162,11 @@ const [emailError, setEmailError] = useState('');
     // Turn that into an image
     const data = canvas.toDataURL('image/png');
     // Create a PDF
-    const pdf = new jsPDF('p', 'pt', 'a4');
+    // const pdf = new jsPDF('p', 'pt', 'a4');
+    const pdf = new window.jspdf.jsPDF("p", "pt", [794, 1123]);
     const imgProps = pdf.getImageProperties(data);
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+    const pdfWidth = 794;
+    const pdfHeight = 1123;
     pdf.addImage(data, 'PNG', 0, 0, pdfWidth, pdfHeight);
 
     // Convert to a blob, then to a File (so we can append it to FormData)
