@@ -1,0 +1,85 @@
+
+.invoice-container {
+    font-family: "Montserrat", sans-serif;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    width: 794px;
+    height: 1123px;
+    border: 1px solid rgb(77, 77, 77);
+
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+}
+
+@page {
+    margin: 0;
+    /* or a smaller value if you need a little breathing room */
+}
+
+
+
+.upperBox {
+    width: 100%;
+    height: 100%;
+}
+
+.downBox {
+    width: 100%;
+
+}
+
+.header-bar {
+    width: 100%;
+    height: 14px;
+    background-color: #F29622;
+}
+
+.invoice-num {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding: 0px 20px 0px 10px;
+
+}
+
+.invoice-flex {
+    display: flex;
+    flex-direction: column;
+}
+
+.invoice-title {
+    justify-self: end;
+}
+
+
+.invoice-title {
+    font-weight: 700;
+    font-size: 20px;
+    color: #F29622;
+    margin-top: -2px;
+    text-align: end;
+}
+
+.invoice-number {
+    font-weight: 600;
+    font-size: 16px;
+    color: black;
+
+    text-align: end;
+}
+
+
+
+#buissnessComp {
+    padding: 0px 20px;
+}
+
+
+/* /////////// invoice recipt css END //////////////// */
