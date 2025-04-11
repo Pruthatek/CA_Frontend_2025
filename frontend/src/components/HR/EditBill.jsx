@@ -4,7 +4,7 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Download, FileChartColumn, Mail, Send, X } from "lucide-react";
 import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
+// import jsPDF from "jspdf";
 import { useYear } from "../YearContext/YearContext";
 
 const EditBill = ({ bill, onBack, fetchBills }) => {
